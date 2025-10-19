@@ -30,8 +30,8 @@ export const errorHandler = (
     error: {
       code: err.code || 'INTERNAL_ERROR',
       message,
-      ...(process.env.NODE_ENV === 'development' && { details: err.stack })
-    }
+      ...(process.env.NODE_ENV === 'development' && { details: err.stack }),
+    },
   }
 
   res.status(statusCode).json(response)
