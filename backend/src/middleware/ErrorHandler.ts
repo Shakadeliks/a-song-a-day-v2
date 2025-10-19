@@ -5,15 +5,20 @@ interface ErrorResponse {
   error: {
     code: string
     message: string
-    details?: any
+    details?: unknown
   }
 }
 
+interface AppError extends Error {
+  statusCode?: number
+  code?: string
+}
+
 export const errorHandler = (
-  err: any,
-  req: Request,
+  err: AppError,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ) => {
   console.error('Error:', err)
 
@@ -25,8 +30,8 @@ export const errorHandler = (
     error: {
       code: err.code || 'INTERNAL_ERROR',
       message,
-      ...(process.env.NODE_ENV === 'development' && { details: err.stack })
-    }
+      ...(process.env.NODE_ENV === 'development' && { details: err.stack }),
+    },
   }
 
   res.status(statusCode).json(response)

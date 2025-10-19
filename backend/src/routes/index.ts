@@ -12,15 +12,15 @@ const router = Router()
 
 // Placeholder route
 router.get('/', (req, res) => {
-  res.json({ 
+  res.json({
     message: 'A Song a Day API',
     version: '1.0.0',
     endpoints: {
       health: '/health',
       auth: '/api/auth',
       songs: '/api/songs',
-      user: '/api/user'
-    }
+      user: '/api/user',
+    },
   })
 })
 
